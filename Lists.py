@@ -57,5 +57,9 @@ class Lists:
         file_listbox = event.widget #recupera el listbox que desencadenó el evento
         selected_index = file_listbox.curselection()
 
+        print(file_listbox.get(selected_index[0]))
+
         if selected_index:
+            self.Menu.destroy_frame
             self.selected_item = file_listbox.get(selected_index[0])
+            self.Menu = Menu_lists(self.frame_up, self.selected_folder, self.selected_category, self.selected_item)

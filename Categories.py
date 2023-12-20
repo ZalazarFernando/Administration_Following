@@ -61,8 +61,6 @@ class Categories:
         file_listbox = event.widget #recupera el listbox que desencadenó el evento
         selected_index = file_listbox.curselection()
 
-        print("hola")
-
         if selected_index:
             selected_item = file_listbox.get(selected_index[0])
             current_tab = self.tab_listbox_mapping.get(file_listbox)

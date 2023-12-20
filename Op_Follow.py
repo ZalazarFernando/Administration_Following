@@ -22,13 +22,13 @@ def delete_name(folder, category, name):
     lines = []
     try:
         with open(folder+"/"+category+".txt", "r") as file:
-            lines.append(file.readline())
+            lines = file.readlines()
     except IOError:
-        print("error")
+        print("Error reading file.")
     finally:
-        for line in lines:
-            if name in line:
-                lines.remove(line)
+        lines = [line for line in lines if name not in line]
 
-        with open(folder+"/"+category+".txt", "a") as file:
-            file.write(lines)
+        with open(folder+"/"+category+".txt", "w") as file:
+            file.writelines(lines)
+
+#get and set

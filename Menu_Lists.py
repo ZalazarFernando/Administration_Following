@@ -21,6 +21,9 @@ class Menu_lists:
         self.this_frame.config(bg = "#ec03fc")
         self.this_frame.place(x=0,y=0 ,width=800,height=30)
 
+    def destroy_frame(self):
+        self.this_frame.destroy()
+
     def create_btns(self):
         self.create_btn_add()
         self.create_btn_delete()

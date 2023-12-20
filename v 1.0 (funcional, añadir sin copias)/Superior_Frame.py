@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-from Adding_App import Adding_app
+from Adding_Category import Adding_Category
 
 class Superior_Frame:
 
@@ -28,4 +28,4 @@ class Superior_Frame:
 
     def on_click_btn_add(self):
         self.app.withdraw()
-        adding_app = Adding_app(self.app, self.categories_frame)
+        adding_app = Adding_Category(self.app, self.categories_frame)

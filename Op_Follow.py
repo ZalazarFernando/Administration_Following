@@ -1,4 +1,4 @@
-def save(folder, category, name, specification):
+def save_element(folder, category, name, specification):
     try:
         with open(folder+"/"+category+".txt", 'a') as file:
             file.write(name+" - "+specification+"\n")

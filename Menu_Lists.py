@@ -3,12 +3,13 @@ from tkinter import *
 from tkinter import ttk
 
 import Op_Follow
+from Add_Element import Add_Element
 
 class Menu_lists:
 
-    def __init__(self, app, selected_folder,selected_category, selected_item = None):
+    def __init__(self, frame, app, selected_folder, selected_category, selected_item = None):
         self.app = app
-
+        self.frame = frame
         self.folder = selected_folder
         self.category = selected_category
         self.name = selected_item
@@ -17,7 +18,7 @@ class Menu_lists:
         self.create_btns()
 
     def create_frame(self):
-        self.this_frame = tk.Frame(self.app)
+        self.this_frame = tk.Frame(self.frame)
         self.this_frame.config(bg = "#ec03fc")
         self.this_frame.place(x=0,y=0 ,width=800,height=30)
 
@@ -39,9 +40,8 @@ class Menu_lists:
         self.btn_delete.config(width=10, height=30)
 
     def on_click_btn_add(self):
-        pass
-        #codificar una manera para que se agreguen los nombres al archivo
-        #sin necesidad de poner a que categoría pertenece (porque ya se está dentro de la categoría misma)
+        self.app.withdraw()
+        add_element = Add_Element(self.app)
 
     def on_click_btn_delete(self):
         Op_Follow.delete_name(

@@ -23,6 +23,8 @@ class Categories:
         self.add_tabs_with_file_list("Instagram")
         self.add_tabs_with_file_list("Youtube")
 
+        self.this_frame.bind("<FocusIn>", lambda event: self.refresh())
+
     def create_frame(self,app):
         self.this_frame = Frame(app)
         self.this_frame.config(bg="#03fc88")

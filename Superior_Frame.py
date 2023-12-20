@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 
-from Adding_App import Adding_app
+from Adding_Category import Adding_Category
 
 class Superior_Frame:
 
@@ -33,8 +33,7 @@ class Superior_Frame:
         self.btn_delete.config(width=10, height=30)
 
     def on_click_btn_add(self):
-        self.app.withdraw()
-        adding_app = Adding_app(self.app, self.categories_frame)
+        pass
 
     def on_click_btn_delete(self):
         pass

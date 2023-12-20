@@ -4,13 +4,13 @@ from tkinter import ttk
 
 import Op_Follow
 
-class Adding_app(tk.Tk):
 
-    def __init__(self, app, categories_frame):
+class Add_Element(tk.Tk):
+
+    def __init__(self, app):
         super().__init__()
 
         self.app = app
-        self.categories_frame = categories_frame
 
         self.geometry("300x220")
         self.title("Add follow")
@@ -25,11 +25,11 @@ class Adding_app(tk.Tk):
         self.create_textbox_name()
         self.create_textbox_category()
         self.create_textbox_app()
-        self.create_button_done()
         self.create_textbox_specification()
+        self.create_button_done()
 
     def create_frame(self):
-        self.this_frame = Frame(self)
+        self.this_frame = tk.Frame(self)
         self.this_frame.config(bg = "#ec03fc")
         self.this_frame.place(x=0,y=0 ,width=300,height=300)
 
@@ -51,15 +51,29 @@ class Adding_app(tk.Tk):
         label_category = Label(self.this_frame, text="what category:")
         label_category.place(x=10, y=90, width=280, height=20)
 
-        self.textbox_category = Entry(self.this_frame)
-        self.textbox_category.place(x=10, y=110, width=280, height=20)
+        options = ["Art", "Book", "Journary", "Photo", "Shop"]#cambiar para que busque cuantas y qué categorías hay
+
+        self.combo_categories = ttk.Combobox(self.this_frame, values=options)
+        self.combo_categories.place(x=10, y=110, width=280, height=20)
+        self.combo_categories["state"] = "disabled"
+        """self.textbox_category = Entry(self.this_frame)
+        self.textbox_category.place(x=10, y=110, width=280, height=20)"""
 
     def create_textbox_app(self):
         label_app = Label(self.this_frame, text="what app:")
         label_app.place(x=10, y=130, width=280, height=20)
 
-        self.textbox_app = Entry(self.this_frame)
-        self.textbox_app.place(x=10, y=150, width=280, height=20)
+        options = ["Instagram", "Youtube"]#cambiar para que busque cuantas y qué apps hay
+
+        combo_apps = ttk.Combobox(self.this_frame, values=options)
+        combo_apps.place(x=10, y=150, width=280, height=20)
+        combo_apps.bind("<<ComboboxSelected>>", self.on_select_first)
+
+        """self.textbox_app = Entry(self.this_frame)
+        self.textbox_app.place(x=10, y=150, width=280, height=20)"""
+
+    def on_select_first(self, event):
+        self.combo_categories.configure(state="normal")
 
     def create_button_done(self):
         self.btn_done = Button(self.this_frame, text="Done", command=self.save_follow)
@@ -81,6 +95,6 @@ class Adding_app(tk.Tk):
             self.close_this_app()
 
     def close_this_app(self):
-        self.categories_frame.refresh()
+        #self.categories_frame.refresh()
         self.app.deiconify()
         self.destroy()

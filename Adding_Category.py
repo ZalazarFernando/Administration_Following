@@ -4,7 +4,7 @@ from tkinter import ttk
 
 import Op_Follow
 
-class Adding_app(tk.Tk):
+class Adding_Category(tk.Tk):
 
     def __init__(self, app, categories_frame):
         super().__init__()
@@ -71,7 +71,7 @@ class Adding_app(tk.Tk):
             category=self.textbox_category.get(),
             name=self.textbox_name.get()
         ) == 0):
-            Op_Follow.save(
+            Op_Follow.save_element(
                 folder=self.textbox_app.get(),
                 category=self.textbox_category.get(),
                 name=self.textbox_name.get(),

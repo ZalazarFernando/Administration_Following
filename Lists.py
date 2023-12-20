@@ -14,7 +14,7 @@ class Lists:
         self.create_frame_down()
         self.show_info()
 
-        self.Menu = Menu_lists(self.frame_up, self.selected_folder, self.selected_category, self.selected_item)
+        self.Menu = Menu_lists(self.frame_up, self.app, self.selected_folder, self.selected_category, self.selected_item)
     
     def create_frame_up(self):
         self.frame_up = Frame(self.app)

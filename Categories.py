@@ -9,7 +9,6 @@ class Categories:
     tab_listbox_mapping = {}
 
     def __init__(self, app, lists_frame):
-        print("hola")
         self.app = app
         self.lists_frame = lists_frame
 
@@ -62,6 +61,8 @@ class Categories:
         file_listbox = event.widget #recupera el listbox que desencadenó el evento
         selected_index = file_listbox.curselection()
 
+        print("hola")
+
         if selected_index:
             selected_item = file_listbox.get(selected_index[0])
             current_tab = self.tab_listbox_mapping.get(file_listbox)
@@ -69,4 +70,4 @@ class Categories:
             tab_text = self.tab_control.tab(current_tab, "text") 
 
             if current_tab:
-                self.lists_frame.refresh_this_frame(selected_item, tab_text)
+                self.lists_frame.refresh_frame_down(selected_item, tab_text)

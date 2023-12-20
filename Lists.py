@@ -10,20 +10,27 @@ class Lists:
         self.app = app
         self.selected_item = None
         
-        self.create_frame()
+        self.create_frame_up()
+        self.create_frame_down()
         self.show_info()
 
-        self.Menu = Menu_lists(self.this_frame, self.selected_folder, self.selected_category, self.selected_item)
+        self.Menu = Menu_lists(self.frame_up, self.selected_folder, self.selected_category, self.selected_item)
+    
+    def create_frame_up(self):
+        self.frame_up = Frame(self.app)
+        self.frame_up.config(bg = "#eb6434")
+        self.frame_up.place(x=510,y=30 ,width=280,height=30)
 
-    def create_frame(self):
-        self.this_frame = Frame(self.app)
-        self.this_frame.config(bg = "#eb6434")
-        self.this_frame.place(x=510,y=30 ,width=280,height=500)
+    def create_frame_down(self):
+        self.frame_down = Frame(self.app)
+        self.frame_down.config(bg = "#eb6434")
+        self.frame_down.place(x=510,y=60 ,width=280,height=400)
 
-    def refresh_this_frame(self, selected_item=None, current_tab = None):
+    def refresh_frame_down(self, selected_item=None, current_tab = None):
         self.lines_listbox.destroy()
-        self.Menu #no se muestra el menu cuando se aprieta un botón
         self.show_info(selected_item, current_tab)
+        self.Menu = Menu_lists(self.frame_up, self.selected_folder, self.selected_category, self.selected_item)
+        
 
     def set_lines_within_files(self, selected_item, current_tab = None):
         self.selected_category = selected_item
@@ -38,7 +45,7 @@ class Lists:
     def show_info(self, selected_item=None, current_tab = None):
         lines_within_files = self.set_lines_within_files(selected_item, current_tab)
 
-        self.lines_listbox = Listbox(self.this_frame)
+        self.lines_listbox = Listbox(self.frame_down)
         self.lines_listbox.pack(fill="both", expand=True)
 
         self.lines_listbox.bind("<<ListboxSelect>>", self.on_listbox_select)

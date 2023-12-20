@@ -51,7 +51,7 @@ class Add_Element(tk.Tk):
         label_category = Label(self.this_frame, text="what category:")
         label_category.place(x=10, y=90, width=280, height=20)
 
-        options = ["Art", "Book", "Journary", "Photo", "Shop"]#cambiar para que busque cuantas y qué categorías hay
+        options = []#cambiar para que busque cuantas y qué categorías hay
 
         self.combo_categories = ttk.Combobox(self.this_frame, values=options)
         self.combo_categories.place(x=10, y=110, width=280, height=20)
@@ -63,17 +63,24 @@ class Add_Element(tk.Tk):
         label_app = Label(self.this_frame, text="what app:")
         label_app.place(x=10, y=130, width=280, height=20)
 
-        options = ["Instagram", "Youtube"]#cambiar para que busque cuantas y qué apps hay
+        options = Op_Follow.get_app_available()
 
-        combo_apps = ttk.Combobox(self.this_frame, values=options)
-        combo_apps.place(x=10, y=150, width=280, height=20)
-        combo_apps.bind("<<ComboboxSelected>>", self.on_select_first)
+        self.combo_apps = ttk.Combobox(self.this_frame, values=options)
+        self.combo_apps.place(x=10, y=150, width=280, height=20)
+        self.combo_apps.bind("<<ComboboxSelected>>", self.on_select_first)
 
         """self.textbox_app = Entry(self.this_frame)
         self.textbox_app.place(x=10, y=150, width=280, height=20)"""
 
     def on_select_first(self, event):
         self.combo_categories.configure(state="normal")
+        name_folder = self.combo_apps.get()
+        aux_str = Op_Follow.get_categories_available(name_folder)
+        options = []
+        for aux in aux_str:
+            options.append(aux.replace(".txt", ""))
+
+        self.combo_categories["values"] = options
 
     def create_button_done(self):
         self.btn_done = Button(self.this_frame, text="Done", command=self.save_follow)

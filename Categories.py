@@ -20,8 +20,8 @@ class Categories:
 
         self.tab_control.pack(expand=1, fill="both")
 
-        self.add_tabs_with_file_list("Instagram")
-        self.add_tabs_with_file_list("Youtube")
+        self.add_tabs_with_file_list("apps/Instagram")
+        self.add_tabs_with_file_list("apps/Youtube")
 
         self.this_frame.bind("<FocusIn>", lambda event: self.refresh())
 
@@ -34,18 +34,19 @@ class Categories:
         for tab in self.tab_control.tabs():
             self.tab_control.forget(tab)
 
-        self.add_tabs_with_file_list("Instagram")
-        self.add_tabs_with_file_list("Youtube")
+        self.add_tabs_with_file_list("apps/Instagram")
+        self.add_tabs_with_file_list("apps/Youtube")
 
     def list_files_in_directory(self, directory):
         file_list = os.listdir(directory)
         return file_list
 
-    def add_tabs_with_file_list(self, directory): 
+    def add_tabs_with_file_list(self, directory):
+        directory_name = directory.replace("apps/", "")
         file_list = self.list_files_in_directory(directory)
 
         tab = ttk.Frame(self.tab_control)
-        self.tab_control.add(tab, text=directory)
+        self.tab_control.add(tab, text=directory_name)
 
         file_listbox = Listbox(tab)
         file_listbox.pack(fill="both", expand=True)

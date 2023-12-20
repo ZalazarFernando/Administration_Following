@@ -70,4 +70,4 @@ class Categories:
             tab_text = self.tab_control.tab(current_tab, "text") 
 
             if current_tab:
-                self.lists_frame.refresh_frame_down(selected_item, tab_text)
+                self.lists_frame.refresh(selected_item, tab_text)

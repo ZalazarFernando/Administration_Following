@@ -9,9 +9,7 @@ class Menu_lists:
 
     def __init__(self, app, lists):
         self.app = app
-        self.folder = lists.selected_folder
-        self.category = lists.selected_category
-        self.name = lists.selected_item
+        self.lists_frame = lists
 
         self.create_frame()
         self.create_btns()
@@ -44,7 +42,7 @@ class Menu_lists:
 
     def on_click_btn_delete(self):
         Op_Follow.delete_name(
-            self.folder,
-            self.category,
-            self.name
+            self.lists_frame.selected_folder,
+            self.lists_frame.selected_category,
+            self.lists_frame.selected_text_return[0]
         )

@@ -5,15 +5,13 @@ from tkinter import ttk
 from Menu_Lists import Menu_lists
 
 class Lists:
-
+    selected_text_return = ""
     def __init__(self, app):
         self.app = app
         self.selected_item = None
         
         self.create_frame()
         self.show_info()
-
-        self.this_frame.bind("<FocusIn>", lambda event: self.refresh())
 
     def create_frame(self):
         self.this_frame = Frame(self.app)
@@ -50,4 +48,4 @@ class Lists:
         selected_index = file_listbox.curselection()
 
         if selected_index:
-            pass
+            self.selected_text_return = [self.lines_listbox.get(index) for index in selected_index]

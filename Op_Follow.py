@@ -22,17 +22,17 @@ def compare_with_file(folder, category, name):
 
 #conectado, aun no verificado
 def delete_name(folder, category, name):
-    lines = []
     try:
         with open("apps/"+folder+"/"+category+".txt", "r") as file:
             lines = file.readlines()
     except IOError:
         print("Error reading file.")
-    finally:
-        lines = [line for line in lines if name not in line]
+        return
 
-        with open(folder+"/"+category+".txt", "w") as file:
-            file.writelines(lines)
+    with open("apps/"+folder+"/"+category+".txt", "w") as file:
+        for line in lines:
+            if name not in line:
+                file.write(line)
 
 #get and set
 def get_app_available():

@@ -29,7 +29,7 @@ class Lists:
         self.selected_folder = current_tab
         lines_within_files = ()
         try:
-            with open(current_tab+"/"+selected_item+".txt", 'r') as file_read:
+            with open("apps/"+current_tab+"/"+selected_item+".txt", 'r') as file_read:
                 lines_within_files = file_read.readlines()
         finally:
             return lines_within_files

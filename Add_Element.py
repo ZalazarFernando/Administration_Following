@@ -87,19 +87,14 @@ class Add_Element(tk.Tk):
         self.btn_done.place(x=200, y=180, width=50, height=30)
 
     def save_follow(self):
-        if (Op_Follow.compare_with_file(
-            folder=self.textbox_app.get(),
-            category=self.textbox_category.get(),
-            name=self.textbox_name.get()
-        ) == 0):
-            Op_Follow.save_element(
-                folder=self.textbox_app.get(),
-                category=self.textbox_category.get(),
-                name=self.textbox_name.get(),
-                specification=self.textbox_specification.get()
-            )
+        Op_Follow.save_element(
+            folder=self.combo_apps.get(),
+            category=self.combo_categories.get(),
+            name=self.textbox_name.get(),
+            specification=self.textbox_specification.get()
+        )
 
-            self.close_this_app()
+        self.close_this_app()
 
     def close_this_app(self):
         #self.categories_frame.refresh()

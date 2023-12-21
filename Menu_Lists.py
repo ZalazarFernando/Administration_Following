@@ -41,7 +41,7 @@ class Menu_lists:
         add_element = Add_Element(self.app)
 
     def on_click_btn_delete(self):
-        Op_Follow.delete_name(
+        Op_Follow.delete_element(
             self.lists_frame.selected_folder,
             self.lists_frame.selected_category,
             self.lists_frame.selected_text_return[0]

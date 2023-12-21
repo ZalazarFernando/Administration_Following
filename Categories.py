@@ -66,9 +66,11 @@ class Categories:
 
         if selected_index:
             selected_item = file_listbox.get(selected_index[0])
+            self.selected_text_return = [file_listbox.get(index) for index in selected_index]
+
             current_tab = self.tab_listbox_mapping.get(file_listbox)
             #obtiene el atributo text o sea el nombre
-            tab_text = self.tab_control.tab(current_tab, "text") 
+            self.tab_text = self.tab_control.tab(current_tab, "text") 
 
             if current_tab:
-                self.lists_frame.refresh(selected_item, tab_text)
+                self.lists_frame.refresh(selected_item, self.tab_text)

@@ -28,7 +28,7 @@ def compare_with_file(folder, category, name):
     return 0
 
 #conectado, aun no verificado
-def delete_name(folder, category, name):
+def delete_element(folder, category, name):
     try:
         with open("apps/"+folder+"/"+category+".txt", "r") as file:
             lines = file.readlines()
@@ -40,6 +40,16 @@ def delete_name(folder, category, name):
         for line in lines:
             if name not in line:
                 file.write(line)
+
+def delete_category(folder, name_category):
+    try:
+        archivo = "apps/"+folder+"/"+name_category+".txt"
+        os.remove(archivo)
+        print(f"El archivo en '{archivo}' ha sido eliminado exitosamente.")
+    except FileNotFoundError:
+        print(f"El archivo en 'apps/{folder}/{name_category}.txt' no se encontró.")
+    except Exception as e:
+        print(f"Error al eliminar el archivo en 'apps/{folder}/{name_category}.txt': {e}")
 
 #get and set
 def get_app_available():

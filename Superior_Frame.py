@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 
 from Adding_Category import Adding_Category
+import Op_Follow
 
 class Superior_Frame:
 
@@ -37,4 +38,7 @@ class Superior_Frame:
         add_element = Adding_Category(self.app, self.categories_frame)
 
     def on_click_btn_delete(self):
-        pass
+        Op_Follow.delete_category(
+            folder=self.categories_frame.tab_text,
+            name_category= self.categories_frame.selected_text_return[0]
+        )

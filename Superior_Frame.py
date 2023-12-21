@@ -33,7 +33,8 @@ class Superior_Frame:
         self.btn_delete.config(width=10, height=30)
 
     def on_click_btn_add(self):
-        pass
+        self.app.withdraw()
+        add_element = Adding_Category(self.app, self.categories_frame)
 
     def on_click_btn_delete(self):
         pass

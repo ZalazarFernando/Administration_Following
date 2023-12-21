@@ -8,6 +8,13 @@ def save_element(folder, category, name, specification):
     except IOError:
         print("Error al guardar los datos en el archivo")
 
+def save_category(folder, name_new_category):
+    try:
+         with open("apps/"+folder+"/"+name_new_category+".txt", 'x'):
+            pass
+    except IOError:
+        print("Error al guardar los datos en el archivo")
+
 def compare_with_file(folder, category, name):
     try:
         with open("apps/"+folder+"/"+category+".txt", 'r') as file:

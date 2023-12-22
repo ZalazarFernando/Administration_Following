@@ -1,5 +1,25 @@
 import os
 
+def get_info_element(current_tab, selected_item, filter_condition = None):
+    lines_within_files = []
+    try:
+        with open("apps/"+current_tab+"/"+selected_item+".txt", 'r') as file_read:
+            all_lines = file_read.readlines()
+
+            if filter_condition == "" or filter_condition is None:
+                lines_within_files = all_lines
+                return lines_within_files
+            else:
+                for line in all_lines:
+                    if filter_condition in line:
+                        lines_within_files.append(line)
+                return lines_within_files
+    except IOError:
+         print("Error al obtener archivos")
+    
+def get_info_category(directory):
+    file_list = os.listdir(directory)
+    return file_list
 
 def save_element(folder, category, name, specification):
     try:

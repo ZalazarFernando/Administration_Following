@@ -1,8 +1,7 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
 
-from Menu_Lists import Menu_lists
+import Op_Follow
 
 class Lists:
     selected_text_return = ""
@@ -18,30 +17,41 @@ class Lists:
         self.this_frame.config(bg = "#eb6434")
         self.this_frame.place(x=510,y=60 ,width=280,height=400)
 
-    def refresh(self, selected_item=None, current_tab = None):
+    def refresh(self, filter_condition, selected_item=None, current_tab = None):
         self.lines_listbox.destroy()
-        self.show_info(selected_item, current_tab)
+        self.show_info(selected_item, current_tab, filter_condition)
 
-    def set_lines_within_files(self, selected_item, current_tab = None):
+    def set_lines_within_files(self, filter_condition, selected_item, current_tab = None):
         self.selected_category = selected_item
         self.selected_folder = current_tab
-        lines_within_files = ()
-        try:
-            with open("apps/"+current_tab+"/"+selected_item+".txt", 'r') as file_read:
-                lines_within_files = file_read.readlines()
-        finally:
-            return lines_within_files
+
+        if filter_condition == "" or filter_condition == None:
+            return Op_Follow.get_info_element(
+                        current_tab= current_tab,
+                        selected_item= selected_item
+                    )
+        else:
+            return Op_Follow.get_info_element(
+                        current_tab= current_tab,
+                        selected_item= selected_item,
+                        filter_condition= filter_condition
+                    )
     
-    def show_info(self, selected_item=None, current_tab = None):
-        lines_within_files = self.set_lines_within_files(selected_item, current_tab)
+    def show_info(self, selected_item = None, current_tab = None, filter_condition = None):
+        if selected_item != None and current_tab != None:
+            lines_within_files = self.set_lines_within_files(
+                    filter_condition= filter_condition, 
+                    selected_item= selected_item, 
+                    current_tab= current_tab)
 
         self.lines_listbox = Listbox(self.this_frame)
         self.lines_listbox.pack(fill="both", expand=True)
+        
+        if selected_item != None and current_tab != None:
+            for line in lines_within_files:
+                    self.lines_listbox.insert(END, line)
 
         self.lines_listbox.bind("<<ListboxSelect>>", self.on_listbox_select)
-
-        for line in lines_within_files:
-            self.lines_listbox.insert(END, line)
 
     def on_listbox_select(self, event):
         file_listbox = event.widget #recupera el listbox que desencadenó el evento

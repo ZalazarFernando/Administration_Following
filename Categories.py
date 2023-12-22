@@ -4,18 +4,20 @@ from tkinter import ttk
 import os
 
 from Superior_Frame import Superior_Frame
+import Op_Follow
 
 class Categories:
     tab_listbox_mapping = {}
+    search_condition = ""
 
     def __init__(self, app, lists_frame):
         self.app = app
         self.lists_frame = lists_frame
+        self.filter_condition = tk.StringVar(app)
 
         self.create_frame(app)
 
-        self.sup_frame = Superior_Frame(self.this_frame) #cambiar esto y hacer un nuevo menú para añadir y eliminar desde aquí
-
+        #self.sup_frame = Superior_Frame(self.this_frame)
         self.tab_control = ttk.Notebook(self.this_frame)
 
         self.tab_control.pack(expand=1, fill="both")
@@ -37,13 +39,9 @@ class Categories:
         self.add_tabs_with_file_list("apps/Instagram")
         self.add_tabs_with_file_list("apps/Youtube")
 
-    def list_files_in_directory(self, directory):
-        file_list = os.listdir(directory)
-        return file_list
-
     def add_tabs_with_file_list(self, directory):
         directory_name = directory.replace("apps/", "")
-        file_list = self.list_files_in_directory(directory)
+        file_list = Op_Follow.get_info_category(directory)
 
         tab = ttk.Frame(self.tab_control)
         self.tab_control.add(tab, text=directory_name)
@@ -60,6 +58,9 @@ class Categories:
 
         file_listbox.bind("<<ListboxSelect>>", self.on_listbox_select)
 
+    def set_search_condition(self, text):
+        self.search_condition = text
+
     def on_listbox_select(self, event):
         file_listbox = event.widget #recupera el listbox que desencadenó el evento
         selected_index = file_listbox.curselection()
@@ -70,7 +71,15 @@ class Categories:
 
             current_tab = self.tab_listbox_mapping.get(file_listbox)
             #obtiene el atributo text o sea el nombre
-            self.tab_text = self.tab_control.tab(current_tab, "text") 
+            self.tab_text = self.tab_control.tab(current_tab, "text")
 
             if current_tab:
-                self.lists_frame.refresh(selected_item, self.tab_text)
+                if self.filter_condition == None:
+                    self.lists_frame.refresh(
+                        selected_item= selected_item, 
+                        current_tab= self.tab_text)
+                else:
+                    self.lists_frame.refresh(
+                        filter_condition= self.search_condition, 
+                        selected_item= selected_item, 
+                        current_tab= self.tab_text)

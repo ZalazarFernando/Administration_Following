@@ -7,12 +7,13 @@ import Op_Follow
 
 class Superior_Frame:
 
-    def __init__(self, app, categories_frame=None):
+    def __init__(self, app, categories_frame):
         self.app = app
         self.categories_frame = categories_frame
 
         self.create_frame()
         self.create_btns()
+        self.create_textbox_search()
 
     def create_frame(self):
         self.this_frame = tk.Frame(self.app)
@@ -42,3 +43,15 @@ class Superior_Frame:
             folder=self.categories_frame.tab_text,
             name_category= self.categories_frame.selected_text_return[0]
         )
+
+    def create_textbox_search(self):
+        self.textbox_search = Entry(
+            self.this_frame, 
+            textvariable=self.categories_frame.filter_condition
+            )
+        self.textbox_search.pack(fill="both", side=RIGHT) 
+
+        self.categories_frame.filter_condition.trace_add("write", self.on_search_change)
+
+    def on_search_change(self, *args):
+        self.categories_frame.set_search_condition(self.categories_frame.filter_condition.get())

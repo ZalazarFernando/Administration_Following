@@ -36,6 +36,11 @@ class Menu_lists:
     def on_click_btn_add(self):
         self.app.withdraw()
         add_element = Add_Element(self.app)
+        self.lists_frame.refresh(
+            filter_condition= "",
+            selected_item= None,
+            current_tab= self.lists_frame.selected_folder
+        )
 
     def on_click_btn_delete(self):
         if messagebox.askokcancel("Warning", "Do you want to delete this item?") == True:
@@ -43,4 +48,10 @@ class Menu_lists:
                 self.lists_frame.selected_folder,
                 self.lists_frame.selected_category,
                 self.lists_frame.selected_text_return[0]
+            )
+
+            self.lists_frame.refresh(
+            filter_condition= "",
+            selected_item= None,
+            current_tab= self.lists_frame.selected_folder
             )

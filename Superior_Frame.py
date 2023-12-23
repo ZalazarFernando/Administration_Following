@@ -37,6 +37,7 @@ class Superior_Frame:
     def on_click_btn_add(self):
         self.app.withdraw()
         add_element = Adding_Category(self.app, self.categories_frame)
+        self.categories_frame.refresh()
 
     def on_click_btn_delete(self):
         if messagebox.askokcancel("Warning", "Do you want to delete this item?") == True:
@@ -44,6 +45,7 @@ class Superior_Frame:
                 folder=self.categories_frame.tab_text,
                 name_category= self.categories_frame.selected_text_return[0]
             )
+            self.categories_frame.refresh()
 
     def create_textbox_search(self):
         self.textbox_search = Entry(

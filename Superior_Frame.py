@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+from tkinter import messagebox
 
 from Adding_Category import Adding_Category
 import Op_Follow
@@ -39,10 +39,11 @@ class Superior_Frame:
         add_element = Adding_Category(self.app, self.categories_frame)
 
     def on_click_btn_delete(self):
-        Op_Follow.delete_category(
-            folder=self.categories_frame.tab_text,
-            name_category= self.categories_frame.selected_text_return[0]
-        )
+        if messagebox.askokcancel("Warning", "Do you want to delete this item?") == True:
+            Op_Follow.delete_category(
+                folder=self.categories_frame.tab_text,
+                name_category= self.categories_frame.selected_text_return[0]
+            )
 
     def create_textbox_search(self):
         self.textbox_search = Entry(

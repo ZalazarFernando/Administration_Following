@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import ttk
+from tkinter import messagebox
 
 import Op_Follow
 from Add_Element import Add_Element
@@ -18,9 +18,6 @@ class Menu_lists:
         self.frame = tk.Frame(self.app)
         self.frame.config(bg = "#eb6434")
         self.frame.place(x=510,y=30 ,width=280,height=30)
-
-    """def destroy_frame(self):
-        self.this_frame.destroy()"""
 
     def create_btns(self):
         self.create_btn_add()
@@ -41,8 +38,9 @@ class Menu_lists:
         add_element = Add_Element(self.app)
 
     def on_click_btn_delete(self):
-        Op_Follow.delete_element(
-            self.lists_frame.selected_folder,
-            self.lists_frame.selected_category,
-            self.lists_frame.selected_text_return[0]
-        )
+        if messagebox.askokcancel("Warning", "Do you want to delete this item?") == True:
+            Op_Follow.delete_element(
+                self.lists_frame.selected_folder,
+                self.lists_frame.selected_category,
+                self.lists_frame.selected_text_return[0]
+            )

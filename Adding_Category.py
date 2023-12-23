@@ -13,7 +13,7 @@ class Adding_Category(tk.Tk):
         self.categories_frame = categories_frame
 
         self.geometry("300x190")
-        self.title("Add follow")
+        self.title("Add category")
         self.resizable(0,0)
 
         self.create_widget()
